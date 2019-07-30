@@ -10,8 +10,8 @@ set expDir = $1
 @ t0 = 0
 @ tf = $timeStep * ($expEnd - $expStart)
 #
-set dirList      = (`seq $expStart $expEnd`)
-set timeList  = (`seq $t0 $timeStep $tf`)
+set dirList = (`seq $expStart $expEnd`)
+set timeList = (`seq $t0 $timeStep $tf`)
 # set ATPCList = (`repeat 31 printf "1\n"`)
 
 # Loop through selected expnos
@@ -24,7 +24,7 @@ foreach d ($dirList)
         nmrPrintf "Conversion Output: %s \ntime\t%4s min\n" \
         $d/test.fid $timeList[$i]
         # Clean old conversion scripts and files
-        /bin/rm -f fid.com test.fid
+        rm -f fid.com test.fid
         # Headless conversion to nmrPipe format
         bruker -notk -nosleep -auto >& conv.log
         fid.com >>& conv.log
