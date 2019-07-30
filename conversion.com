@@ -14,24 +14,23 @@ set dirList      = (`seq $expStart $expEnd`)
 set timeList  = (`seq $t0 $timeStep $tf`)
 # set ATPCList = (`repeat 31 printf "1\n"`)
 
-#set origDir = (`pwd`)
-
-# Loop expnos
+# Loop through selected expnos
+cd $expDir
+printf "Processing: $expDir \nExperiments: $expStart to $expEnd\n---\n"
 @ i = 0
 foreach d ($dirList)
-   @ i++
-   echo $d
-#    cd $d
-#       nmrPrintf "Conversion Output: %s time %4s min ATP: %4s mM.\n" $d/test.fid $timeList[$i] $ATPCList[$i]
-#
-#       # Clean old conversion scripts and files
-#       /bin/rm -f fid.com test.fid
-#
-#       bruker -notk -nosleep -auto >& conv.log
-#       fid.com >>& conv.log
-#
-#       sethdr test.fid -tau $timeList[$i] -u1 $timeList[$i] -u2 $ATPCList[$i] -title $i-$timeList[$i]-$ATPCList[$i]
-#       report2D.com test.fid
-#       echo ""
-#    cd $origDir
+    @ i++
+    cd $d
+        nmrPrintf "Conversion Output: %s \ntime\t%4s min\n" \
+        $d/test.fid $timeList[$i]
+        # Clean old conversion scripts and files
+        /bin/rm -f fid.com test.fid
+        # Headless conversion to nmrPipe format
+        bruker -notk -nosleep -auto >& conv.log
+        fid.com >>& conv.log
+        # Write header w/ time information
+        sethdr test.fid -tau $timeList[$i] -u1 $timeList[$i] -title $i-$timeList[$i]
+        report2D.com test.fid
+        echo ""
+    cd ..
 end
