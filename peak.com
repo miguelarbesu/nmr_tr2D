@@ -21,11 +21,12 @@ mkdir $tabFolder
 while ($i <= $n)
    set inName  = (`nmrPrintf "$ftFolder/test%03d.ft2"  $i`)
    set outName = (`nmrPrintf "$tabFolder/test%03d.tab" $i`)
-   set autoNoise = (`specStat.com -in $inName -x1 0% -xn 100% -y1 0% -yn 100% -stat vEstNoise -brief`)
+   set autoNoise = (`specStat.com -in $inName -x1 0% -xn 100% \ -y1 0% -yn 100% -stat vEstNoise -brief`)
    echo "Peak picking $inName"
    echo "----------"
    echo "Detection threshold: $autoNoise"
-   pkDetect2D.tcl -in $inName -out $outName -sigma $autoNoise
+   # Mult makes the peak detection threshold n*noise RMSD (i.e. $autoNoise)
+   pkDetect2D.tcl -in $inName -out $outName -sigma $autoNoise -mult 12 -sinc -reject
    echo ""
    echo ""
    @ i++

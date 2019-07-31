@@ -14,3 +14,8 @@ echo "PROCESSING NMRPIPE FIDs"
 echo "-----------------------"
 echo ""
 processing.com $expDir $expStart $expEnd
+
+echo "PICKING PEAKS"
+echo "-------------"
+echo ""
+peak.com $expDir $expStart $expEnd
