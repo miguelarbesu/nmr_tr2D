@@ -12,12 +12,6 @@ cd $expDir
 rm -rf $ftFolder
 mkdir $ftFolder
 
-# Spectra are processed once without extracting a sub-region, and the initial
-# result is used for auto-phasing.
-#
-# Spectra are then reprocessed using the auto phase values, and the
-# desired region of the directly-detected dimension is extracted.
-
 # Loop over seelcted expnos and process converted spectra
 @ i = 0
 foreach d ($dirList)
@@ -28,14 +22,14 @@ foreach d ($dirList)
     set outName = "$d/test.ft2"
 
     echo "Processing $inName to $outName; then moving to $cpName"
-
+# All processing is done here, modify this block to change how
     nmrPipe -in $inName \
     | nmrPipe -fn SOL \
     | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 0.5 \
     | nmrPipe -fn ZF -zf 2 -auto \
     | nmrPipe -fn FT -verb \
-    | nmrPipe -fn PS -p0 -50.0 -p1 0.0 -di \
-    | nmrPipe -fn EXT -x1 3% -xn 47% -sw \
+    | nmrPipe -fn PS -p0 -60.5 -p1 36.0 -di \
+    | nmrPipe -fn EXT -x1 11ppm -xn 6ppm -sw \
     | nmrPipe -fn TP \
     | nmrPipe -fn LP -fb -ord 8 \
     | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 1.0 \
@@ -44,6 +38,7 @@ foreach d ($dirList)
     | nmrPipe -fn PS -p0 -159.2 -p1 130.0 -di \
     | nmrPipe -fn TP \
     | nmrPipe -fn POLY -auto -verb \
+    | nmrPipe -fn EXT -y1 135ppm -yn 105ppm -sw \
     -out $outName -ov
 
     mv $outName $cpName
