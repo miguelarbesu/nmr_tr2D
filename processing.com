@@ -47,7 +47,7 @@ foreach d ($dirList)
     echo ""
 end
 
-# For convenience, the spectral series is rescaled so that the
+# For convenience, the spectral series is rescaled so that ft/test*.ft2the
 # max value in the entire series is 100.0.
 
 set ftList  = ($ftFolder/*.ft2)
@@ -64,3 +64,6 @@ echo "Scaling Spectra by $c ..."
 foreach spectrum ($ftList)
     nmrPipe -in $spectrum -out $spectrum -inPlace -fn MULT -c $c
 end
+
+# Make the collection of 2D planes a time-dependent serie - i.e. a pseudo3D
+seriesT.com $ftList

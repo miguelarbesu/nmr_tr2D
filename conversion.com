@@ -12,7 +12,6 @@ set expDir = $1
 #
 set dirList = (`seq $expStart $expEnd`)
 set timeList = (`seq $t0 $timeStep $tf`)
-# set ATPCList = (`repeat 31 printf "1\n"`)
 
 # Loop through selected expnos
 cd $expDir
