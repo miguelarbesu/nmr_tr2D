@@ -5,25 +5,21 @@ set expDir = $1
 @ expStart = $2
 @ expEnd = $3
 set dirList = (`seq $expStart $expEnd`)
-set ftFolder = ./ft-$expStart-$expEnd
-
-# Go to experiment and create folde to store th processed spectra
+set fidFolder = ./fid_$expStart-$expEnd
+set ftFolder = ./ft_$expStart-$expEnd
+# Go to experiment and create folder to store the processed spectra
 cd $expDir
 rm -rf $ftFolder
 mkdir $ftFolder
 
 # Loop over seelcted expnos and process converted spectra
 @ i = 0
-foreach d ($dirList)
+foreach fid ($fidFolder/*.fid)
     @ i++
-
-    set cpName = (`nmrPrintf $ftFolder/test%03d.ft2 $i`)
-    set inName = "$d/test.fid"
-    set outName = "$d/test.ft2"
-
-    echo "Processing $inName to $outName; then moving to $cpName"
+    set outName = (`nmrPrintf $ftFolder/test%03d.ft2 $i`)
+    echo "Processing $fid to $outName"
 # All processing is done here, modify this block to change how
-    nmrPipe -in $inName \
+    nmrPipe -in $fid \
     | nmrPipe -fn SOL \
     | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 0.5 \
     | nmrPipe -fn ZF -zf 2 -auto \
@@ -41,14 +37,13 @@ foreach d ($dirList)
     | nmrPipe -fn EXT -y1 135ppm -yn 105ppm -sw \
     -out $outName -ov
 
-    mv $outName $cpName
-    report2D.com $cpName
+    report2D.com $outName
     echo "----------"
     echo ""
 end
 
-# For convenience, the spectral series is rescaled so that ft/test*.ft2the
-# max value in the entire series is 100.0.
+# For convenience, the spectral series is rescaled so that the
+# max value in the entire series is 100.
 
 set ftList  = ($ftFolder/*.ft2)
 set maxVal = (`specStat.com -in $ftList[1] -stat vMaxAbs -brief`)

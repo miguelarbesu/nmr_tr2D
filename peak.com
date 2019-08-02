@@ -8,11 +8,11 @@ set dirList = (`seq $expStart $expEnd`)
 # Go to experiment directory
 cd $expDir
 # Define where processed files are
-set ftFolder = ./ft-$expStart-$expEnd
+set ftFolder = ./ft_$expStart-$expEnd
 set ftList  = ($ftFolder/*.ft2)
 set n = $#ftList
 # Remove old peaklist folder and recreate it
-set tabFolder = ./tab-$expStart-$expEnd
+set tabFolder = ./tab_$expStart-$expEnd
 rm -rf $tabFolder
 mkdir $tabFolder
 
