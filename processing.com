@@ -21,13 +21,13 @@ foreach fid ($fidFolder/*.fid)
 # All processing is done here, modify this block to change how
     nmrPipe -in $fid \
     | nmrPipe -fn SOL \
-    | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 0.5 \
+    | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 1.0 \
     | nmrPipe -fn ZF -zf 2 -auto \
     | nmrPipe -fn FT -verb \
     | nmrPipe -fn PS -p0 -60.5 -p1 36.0 -di \
     | nmrPipe -fn EXT -x1 11ppm -xn 6ppm -sw \
     | nmrPipe -fn TP \
-    | nmrPipe -fn LP -fb -ord 8 \
+    # | nmrPipe -fn LP -fb -ord 8 \
     | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 1.0 \
     | nmrPipe -fn ZF -zf 2 -auto \
     | nmrPipe -fn FT -verb \
