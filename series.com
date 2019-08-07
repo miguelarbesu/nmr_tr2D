@@ -18,6 +18,9 @@ set ftFolder = ./ft_$expStart-$expEnd
 # Define peaklist folder, master and series input and series output, clean old
 set tabFolder = ./tab_$expStart-$expEnd
 set masterTab = $expDir/master.tab
+set masterTabCopy = $tabFolder/master.tab
+rm $masterTabCopy
+cp master.tab $masterTabCopy
 set ftList = $tabFolder/series.list
 rm $ftList
 ls $ftFolder/*.ft2 > $tabFolder/series.list
@@ -26,4 +29,4 @@ rm $seriesTab
 # dx and dy = 0 mean strict peak positions along pseudo axis
 echo "Extracting intensities for peaks in $masterTab along slices:"
 cat $ftList
-seriesTab -in $masterTab -list $ftList -dx 0 -dy 0 -out $seriesTab
+seriesTab -in $masterTabCopy -list $ftList -dx 0 -dy 0 -out $seriesTab
