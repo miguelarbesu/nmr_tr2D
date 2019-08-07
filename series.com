@@ -17,7 +17,7 @@ cd $expDir
 set ftFolder = ./ft_$expStart-$expEnd
 # Define peaklist folder, master and series input and series output, clean old
 set tabFolder = ./tab_$expStart-$expEnd
-set masterTab = $tabFolder/master.tab
+set masterTab = $expDir/master.tab
 set ftList = $tabFolder/series.list
 rm $ftList
 ls $ftFolder/*.ft2 > $tabFolder/series.list
