@@ -18,12 +18,19 @@ foreach fid ($fidFolder/*.fid)
     @ i++
     set outName = (`nmrPrintf $ftFolder/test%03d.ft2 $i`)
     echo "Processing $fid to $outName"
-# All processing is done here, modify this block to change how
+# All processing is done in the following block,
+# Modify it to change parameters.
+# Specially, phasing (PS) ans spectral trimmming (EXT) need to be checked.
+#
+# IMPORTANT: a 47.75 Hz correction for the TROSY 1H-15N splitting is applied to
+# both dimensions.
+# Comment them out (RS functions) if your experiments are not TROSY
     nmrPipe -in $fid \
     | nmrPipe -fn SOL \
     | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 1.0 \
     | nmrPipe -fn ZF -zf 2 -auto \
     | nmrPipe -fn FT -verb \
+    | nmrPipe -fn RS -rs 47.75Hz  \
     | nmrPipe -fn PS -p0 -60.5 -p1 36.0 -di \
     | nmrPipe -fn EXT -x1 11ppm -xn 6ppm -sw \
     | nmrPipe -fn TP \
@@ -31,6 +38,7 @@ foreach fid ($fidFolder/*.fid)
     | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 1.0 \
     | nmrPipe -fn ZF -zf 2 -auto \
     | nmrPipe -fn FT -verb \
+    | nmrPipe -fn RS -rs 47.75Hz  \
     | nmrPipe -fn PS -p0 -159.2 -p1 130.0 -di \
     | nmrPipe -fn TP \
     | nmrPipe -fn POLY -auto -verb \
