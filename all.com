@@ -15,6 +15,11 @@ echo "-----------------------"
 echo ""
 processing.com $expDir $expStart $expEnd
 
+echo "CALCULATING DIFFERENCE SPECTRA VS REFERENCE"
+echo "-------------------------------------------"
+echo ""
+difference.com $expDir $expStart $expEnd
+
 echo "PICKING PEAKS"
 echo "-------------"
 echo ""

@@ -1,7 +1,7 @@
 #!/usr/bin/csh
 
 # Delete converted spectra
-foreach dir (./data/*/fid-*)
+foreach dir (./data/*/fid_*)
    if (-e $dir) then
        echo "Removing $dir"
       /bin/rm -rf $dir
@@ -9,7 +9,15 @@ foreach dir (./data/*/fid-*)
 end
 
 # Delete processed spectra
-foreach dir (./data/*/ft-*)
+foreach dir (./data/*/ft_*)
+   if (-e $dir) then
+       echo "Removing $dir"
+      /bin/rm -rf $dir
+   endif
+end
+
+# Delete difference spectra
+foreach dir (./data/*/dif_*)
    if (-e $dir) then
        echo "Removing $dir"
       /bin/rm -rf $dir
@@ -17,7 +25,7 @@ foreach dir (./data/*/ft-*)
 end
 
 # Delete peaklists
-foreach dir (./data/*/tab-*)
+foreach dir (./data/*/tab_*)
    if (-e $dir) then
        echo "Removing $dir"
       /bin/rm -rf $dir
