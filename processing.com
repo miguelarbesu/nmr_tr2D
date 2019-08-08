@@ -23,8 +23,7 @@ foreach fid ($fidFolder/*.fid)
 # Specially, phasing (PS) ans spectral trimmming (EXT) need to be checked.
 #
 # IMPORTANT: a 47.75 Hz correction for the TROSY 1H-15N splitting is applied to
-# both dimensions.
-# Comment them out (RS functions) if your experiments are not TROSY
+# both dimensions. Comment the RS functions out if your experiments are not TROSY
     nmrPipe -in $fid \
     | nmrPipe -fn SOL \
     | nmrPipe -fn SP -off 0.5 -end 0.95 -pow 2 -elb 0.0 -glb 0.0 -c 1.0 \
