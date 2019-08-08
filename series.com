@@ -19,17 +19,17 @@ set ftFolder = ./ft_$expStart-$expEnd
 set tabFolder = ./tab_$expStart-$expEnd
 set masterTab = $expDir/master.tab
 set masterTabCopy = $tabFolder/master.tab
-rm $masterTabCopy
+rm -f $masterTabCopy
 cp master.tab $masterTabCopy
 set ftList = $tabFolder/series.list
-rm $ftList
+rm -f $ftList
 ls $ftFolder/*.ft2 > $tabFolder/series.list
 set seriesTab = $tabFolder/series.tab
-rm $seriesTab
+rm -f $seriesTab
 echo "Extracting intensities for peaks in $masterTab along slices:"
 cat $ftList
 # Default -sum uses the sum of intensities of parabolic fitting.
 # -max uses the maximum value of the region defined, so I will use that since
-# I find it more consistent. 
+# I find it more consistent.
 # dx and dy = 0 mean strict peak positions along pseudo axis.
 seriesTab -max -in $masterTabCopy -list $ftList -dx 1 -dy 1 -out $seriesTab -verb

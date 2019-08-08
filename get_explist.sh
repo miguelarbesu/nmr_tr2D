@@ -1,5 +1,5 @@
-
 #!/usr/bin/env bash
+
 EXPDIR=$1
 EXPLIST=$EXPDIR/explist.md
 
