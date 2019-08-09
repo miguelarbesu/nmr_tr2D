@@ -25,7 +25,7 @@ echo "-------------"
 echo ""
 peak.com $expDir $expStart $expEnd
 
-echo "EXTRACTING PEAK INTENSITIES ALONG SERIES"
-echo "----------------------------------------"
-echo ""
-series.com $expDir $expStart $expEnd
+# echo "EXTRACTING PEAK INTENSITIES ALONG SERIES"
+# echo "----------------------------------------"
+# echo ""
+# series.com $expDir $expStart $expEnd
