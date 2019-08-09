@@ -11,7 +11,8 @@ set ftFolder = ./ft_$expStart-$expEnd
 cd $expDir
 rm -rf $ftFolder
 mkdir $ftFolder
-
+# Make a copy of the timeList
+cp $fidFolder/time.list $ftFolder/time.list
 # Loop over seelcted expnos and process converted spectra
 @ i = 0
 foreach fid ($fidFolder/*.fid)

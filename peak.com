@@ -15,7 +15,8 @@ set n = $#ftList
 set tabFolder = ./tab_$expStart-$expEnd
 rm -rf $tabFolder
 mkdir $tabFolder
-
+# Make a copy of the timeList
+cp $ftFolder/time.list $tabFolder/time.list
 # Loop over processed spectra and peak pick
 @ i = 1
 while ($i <= $n)

@@ -11,7 +11,8 @@ set difFolder = ./dif_$expStart-$expEnd
 cd $expDir
 rm -rf $difFolder
 mkdir $difFolder
-
+# Make a copy of the timeList
+cp $ftFolder/time.list $difFolder/time.list
 # Use the 2nd spectrum as reference, assumign that the first one is t0 before
 # starting the experiment - i.e. adding ATP
 # https://unix.stackexchange.com/questions/214445/how-do-i-display-the-nth-result-of-an-ls-command

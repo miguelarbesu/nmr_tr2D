@@ -23,7 +23,7 @@ rm -rf ./$fidFolder
 mkdir ./$fidFolder
 printf "Processing: $expDir \nExperiments: $expStart to $expEnd\n---\n"
 # Save timeList to fid folder
-printf "`seq -s '\n' $t0 $timeStep $tf`" > $fidFolder/time.list
+printf "`seq -s '\n' $t0 $timeStep $tf`\n" > $fidFolder/time.list
 @ i = 0
 foreach d ($dirList)
     @ i++
