@@ -1,7 +1,7 @@
 # Processing of time-resolved 2D spectra
 
 [NmrPipe](https://www.ibbr.umd.edu/nmrpipe/index.html) shell scripts to batch
-process consecutively acquired 2D NMR experiments as a *time-resolved* serie.
+process consecutively acquired 2D NMR experiments as a *time-resolved* series.
 
 ## Description & aim
 
@@ -39,21 +39,23 @@ trivially implemented.
 ## How-to
 
 All C-shell scripts can be run individually, and accept **three positional arguments**:
+
 `script.com /path_to_expdir first_exp last_exp`
 
 0. Clone or download this repository.
 1. Create a /data folder and put/link your experiment directory(ies) in it. You \
 can use `get_explist.sh` to inspect the `title` files of all spectra in
 the folder(s). Note that this is a Bash script.
-2. Adjust the size of the time step (in minutes) in the `conversion.com`
-3. Run `all.com` for batch conversion, processing, and peak picking. Tune
-processing - e.g. phasing, window functions, etc. - as needed using `nmrDraw`.
-It is recommended to perform this step selecting ~5 slices
-4. Use `nmrDraw` to curate your peak list of interest (clean up noise, add
+2. Adjust the size of the time step (in minutes) in the `conversion.com` script.
+3. Run `all.com` for batch conversion, processing, and peak picking.
+4. Tune processing as needed by modifying `processing.com` and using `nmrDraw`
+for inspecting results - e.g. phasing, window functions, etc .
+It is recommended to perform this step selecting ~5 slices.
+5. Use `nmrDraw` to curate your peak list of interest (clean up noise, add
 overlapping or newly appearing peaks) and save it in
 `data/your_experiment/master.tab`. The series of processed spectra and the
 difference slices can help you.
-5. Run `series.com` to track the intensities at the positions of the peaks
+6. Run `series.com` to track the intensities at the positions of the peaks
 defined in your `master.tab`. Results will be saved under the `tab` folder.
 
 Four folders are created in total:
@@ -61,3 +63,6 @@ Four folders are created in total:
 - `ft_*`: processed spectra series in nmrPipe format.
 - `dif_*`: difference spectra series vs reference in nmrPipe format.
 - `tab_*`: Picked peak, master, and time series lists.
+
+`clean.com` can be used without any argument to wipe all four folders, but keep
+`master.tab`.
