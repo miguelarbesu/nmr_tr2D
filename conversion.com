@@ -6,7 +6,7 @@ set expDir = $1
 @ expEnd = $3
 
 # Set time step  - i.e. timestamp when the experiment finishes
-@ timeStep = 0 #minutes
+@ timeStep = 30 #minutes
 @ t0 = 1440
 @ tf = $t0 + $timeStep * ($expEnd - $expStart)
 
