@@ -7,8 +7,8 @@ set expDir = $1
 
 # Set time step  - i.e. timestamp when the experiment finishes
 @ timeStep = 30 #minutes
-@ t0 = 0
-@ tf = $t0 + $timeStep * ($expEnd - $expStart)
+@ t0 = 30
+@ tf = $t0 + $timeStep * ($expEnd - $expStart - 1)
 
 # Define expnos to convert
 set dirList = (`seq $expStart $expEnd`)
