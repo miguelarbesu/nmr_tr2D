@@ -1,4 +1,4 @@
-# Processing of time-resolved 2D spectra
+# Processing time-resolved 2D spectra
 
 [NmrPipe](https://www.ibbr.umd.edu/nmrpipe/index.html) shell scripts to batch
 process consecutively acquired 2D NMR experiments as a *time-resolved* series.
